@@ -36,7 +36,7 @@ group :development, :test do
   gem "faker", "~> 2.20.0"
   gem "factory_bot_rails", "~> 6.2.0"
 
-  gem 'sqlite3', '~> 1.6'
+  gem "sqlite3", "~> 1.6"
 end
 
 group :production do
@@ -47,3 +47,4 @@ gem "web-console"
 gem "spring"
 
 gem "jquery-rails"
+gem "puma", "~>5.2"
