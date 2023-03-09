@@ -33,4 +33,15 @@
 /config/credentials/production.key
 
 
+<<<<<<< Updated upstream
+=======
+# /config/credentials/test.key
+
+/config/credentials/production.key
+
+/config/master.key
+
+/config/credentials/development.key
+
+>>>>>>> Stashed changes
 /config/credentials/test.key
