@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+Feature: User registration
+
+  Scenario: User successfully registers
+    Given I am on the registration page
+    When I fill in the registration form with valid data
+    And I click the "Create" button
+    Then I should be redirected to the root page
+
+=======
 Feature: User can create an account
   As a new user
   I want to be able to register an account
@@ -13,3 +23,4 @@ Feature: User can create an account
     And I click "Create" button
     #Then I should see "A new account is created!"
     Then I should land on login page
+>>>>>>> 4d66d4f0b2acbe7601e3ffbd8a48874a3535faba

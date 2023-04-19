@@ -23,6 +23,16 @@ Background: guests of an event in database
     | 1         | 2     | Fashion     | 1        | join@gmail.com    | Holmes     | Join      | Affiliate    | R2   | false  |                   |                      |            |            | false    | 0              |       |               |
 
   
+
+Scenario: confirm that referral information is added to the database when a referred guest first clicks on a referral link
+  When I go to the purchase page for guest "join@gmail.com" referred by "Sim Amy" for event "Fashion"
+  And I click "Purchase"
+  Then the database should contain the referral for guest "join@gmail.com"
+  When I go to the purchase page for guest "join@gmail.com" referred by "Holmes Join"
+  And I click "Purchase"
+  Then the database should not contain the referral
+  
+  
 Scenario: send referral invitation to existing VIP guest
   Given I am on the show page for "Fashion"
   And I send a "Referral Invitation" email with the following params:
