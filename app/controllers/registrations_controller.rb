@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  skip_before_action :validate_login
   respond_to :json
 
   protected

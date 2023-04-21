@@ -364,6 +364,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mustache (~> 1.1)
+  omniauth (~> 2.1)
   omniauth-oauth2 (~> 1.8)
   pg (~> 1.4.3)
   puma (~> 5.2)

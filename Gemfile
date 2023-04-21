@@ -49,3 +49,5 @@ gem "spring"
 gem "jquery-rails"
 
 gem "omniauth-oauth2", "~> 1.8"
+
+gem "omniauth", "~> 2.1"
