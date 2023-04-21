@@ -47,3 +47,5 @@ gem "web-console"
 gem "spring"
 
 gem "jquery-rails"
+
+gem "omniauth-oauth2", "~> 1.8"
