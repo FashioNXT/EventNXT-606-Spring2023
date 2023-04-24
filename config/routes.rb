@@ -89,11 +89,13 @@ Rails.application.routes.draw do
     end
     
     
-    # Amith - Amin 2023-04-21
+    # ===============================================================================
+    # Amith - Amin 2023-04-21: to give access to CRMNXT team to out users information
     namespace :nxt do
       get 'users' => "users_info#index"
     end
     # Amith - Amin 2023-04-21
+    # ===============================================================================
     
     
     #if your application is hosted at http://example.com 
