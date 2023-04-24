@@ -1,5 +1,5 @@
-# Amith - Amin 2023-04-21
-
+# ===============================================================================
+# Amith - Amin 2023-04-21: to give access to CRMNXT team to out users information
 
 class Api::Nxt::UsersInfoController < ActionController::API
     before_action :authenticate_server
@@ -35,3 +35,6 @@ class Api::Nxt::UsersInfoController < ActionController::API
     def authenticate_server
     end
 end
+
+# ===============================================================================
+# Amith - Amin 2023-04-21: to give access to CRMNXT team to out users information
