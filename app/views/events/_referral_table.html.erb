@@ -1,13 +1,25 @@
-<div id='referral-table' data-controller='index'
+<div id='referral-table' data-controller='index update'
     data-index-url-value='/api/v1/events/<%= @event_id %>/referral_summary'
+    data-update-url-value='/api/v1/events/<%= @event_id %>/referral_summary'
     data-index-limit-offset=0 data-index-limit-value=25>
+  <form id='form-reward' class='d-flex flex-row justify-content-between' data-action='update#sendFromForm'>
+  	<div class='col'>
+        <div class='form-floating'>
+  		<input class='form-control' id='reward' type='number' name='reward' value=10>
+  		<label for='reward'>Referral Percentage _%?</label>
+  	</div>
+  	</div>
+  	
+  	<div class='col'><button class='btn-sm btn-success h-100' form='form-reward' ><i class='bi bi-plus'></i>Update Rewards</button></div>
+  </form>
+
   <template data-index-target='template'>
     <tr>
       <td><span data-nxt-email></span></td>
       <td><span data-nxt-first_name></span> <span data-nxt-last_name></span></td>
       <td><span data-nxt-referred_email></span></td>
       <td><span data-nxt-status></span></td>
-      <td></td>
+      <td><span data-nxt-Rewards></span></td>
     </tr>
   </template>
   <table>
@@ -25,3 +37,5 @@
     </tbody>
   </table>
 </div>
+
+

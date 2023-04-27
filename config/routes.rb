@@ -79,7 +79,7 @@ Rails.application.routes.draw do
     end
         resources :email_templates, path: :templates
         resources :referral_rewards, path: :rewards
-        resources :referral_summary, only: [:index]
+        resources :referral_summary
         resources :seats
       end
     end
