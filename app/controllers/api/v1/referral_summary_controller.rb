@@ -4,7 +4,7 @@ class Api::V1::ReferralSummaryController < Api::V1::ApiController
     reward = ReferralReward.find_by(event_id: params[:event_id])
     
     if reward
-      summary[0]["Rewards"] = summary[0]["Rewards"].to_i + reward[:reward].to_i
+      summary[0]["Rewards"] = summary[0]["Rewards"].to_i * reward[:reward].to_i
     end
     render json: summary, except: [:id]
   end
