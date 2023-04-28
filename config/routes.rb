@@ -91,6 +91,17 @@ Rails.application.routes.draw do
     namespace :v2 do 
       resources :users, only: [:index, :show, :update, :destroy]
     end
+    
+    
+    # ===============================================================================
+    # Amith - Amin 2023-04-21: to give access to CRMNXT team to out users information
+    namespace :nxt do
+      get 'users' => "users_info#index"
+    end
+    # Amith - Amin 2023-04-21
+    # ===============================================================================
+    
+    
     #if your application is hosted at http://example.com 
     #and endpoint is at api/v2/users, 
     #you can make a request to http://example.com/api/v2/users to get a list of users.
