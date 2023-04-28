@@ -123,10 +123,10 @@ ActiveRecord::Schema[7.0].define(version: 202211111668232192) do
     t.datetime "emailed_at", precision: nil
     t.boolean "checked", default: false
     t.integer "guestcommitted"
-    t.string "perks"
-    t.string "comments"
     t.text "qr_code"
     t.text "qr_code_png"
+    t.string "perks"
+    t.string "comments"
     t.index ["added_by"], name: "index_guests_on_added_by"
     t.index ["email", "event_id"], name: "index_guests_on_email_and_event_id", unique: true
     t.index ["event_id"], name: "index_guests_on_event_id"
