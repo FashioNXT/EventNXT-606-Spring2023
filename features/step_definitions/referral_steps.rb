@@ -90,12 +90,7 @@ Then(/^I should see "([^"]*)"$/) do |message|
   # Example: expect(page).to have_content message
 end
 
-Then(/^the referral_rewards table should contain a reward for event "([^"]*)"$/) do |eventName|
-  # Code to verify that the referral information is added to the database
-  event = Event.find_by(:title => eventName)
-  puts event
-  expect(ReferralReward.find_by(event: event.id)).to_not be_nil
-end
+
 
 
 

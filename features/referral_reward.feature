@@ -19,8 +19,8 @@ Background: guests of an event in database
   
   
 Scenario: modifying the referral reward should lead to the creation of a referral reward and consequently updating it
-  Given I am on the show page for "Fashion"
-  And I click "Update Rewards"
-  Then the referral_rewards table should contain a reward for event "Fashion"
- 
+  When I call the create function in the RefferalRewardController for event "Fashion"
+  Then I should get a new Referral Reward for the event "Fashion" in the database
+  When I call the create function again in the RefferalRewardController for event "Fashion"
+  Then the referral reward for the event "Fashion" should be updated in the database
     
