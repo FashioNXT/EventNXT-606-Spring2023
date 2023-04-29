@@ -2,8 +2,9 @@ class GuestsController < ApplicationController
   require 'net/http'
   require 'json'
 
+  
   def index
-    @guests = Guest.all
+    
     @event = Event.find(params[:event_id])
     @guests = @event.guests
   end
@@ -13,33 +14,38 @@ class GuestsController < ApplicationController
     render 'guests/newimport'
   end
 
+  
   def import
-  # Get event ID and API key from user input
-  event_id = params[:guests_import][:event_id]
-  api_key = params[:guests_import][:api_key]
+    # Get event ID and API key from user input
+    event_id = params[:guests_import][:event_id]
+    api_key = params[:guests_import][:api_key]
+    ticketing_website = params[:guests_import][:ticketing_website]
 
-  # Set up API request
-  uri = URI("https://app.ticketmaster.com/partners/v1/events/#{event_id}/#{api_key}")#/guestlist
-  params = { 'apikey' => api_key }
-  uri.query = URI.encode_www_form(params)
-  response = Net::HTTP.get_response(uri)
-  guest_list = JSON.parse(response.body)
+    # Set up API request
+    if ticketing_website == 'Ticketmaster'
+      uri = URI("https://app.ticketmaster.com/partners/v1/events/#{event_id}/#{api_key}")
+      params = { 'apikey' => api_key }
+      uri.query = URI.encode_www_form(params)
+      response = Net::HTTP.get_response(uri)
+      guest_list = JSON.parse(response.body)
+    elsif ticketing_website == 'Eventbrite'
+      uri = URI("https://www.eventbriteapi.com/v3/events/#{event_id}/attendees/")
+      params = { 'token' => api_key }
+      uri.query = URI.encode_www_form(params)
+      response = Net::HTTP.get_response(uri)
+      guest_list = JSON.parse(response.body)
+    else
+      # handle invalid ticketing_website parameter
+      redirect_to guests_path, alert: "Invalid ticketing website"
+      return
+    end
 
-  # Parse guest list and create Guest records
-  guest_list['guests'].each do |guest_data|
-    guest = Guest.new(
-      first_name: guest_data['first_name'],
-      last_name: guest_data['last_name'],
-      email: guest_data['email'],
-      seat_level: guest_data['seat_level'],
-      number_of_seats: guest_data['number_of_seats'],
-      event_id: guest_data['event_id']
-    )
-    guest.save
+    # Parse guest list and create Guest records
+    GuestsImport.new(event_id: event_id, api_key: api_key).add_guests(guest_list)#, ticketing_website: guest_type
+  
+  
+  
   end
-
-  redirect_to guests_path, notice: "Guest list imported successfully"
-end
 
   
   def guests_import_params
