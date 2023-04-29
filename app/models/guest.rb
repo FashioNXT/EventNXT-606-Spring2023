@@ -38,19 +38,52 @@ class Guest < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  #def self.to_csv
+  #  guests = all
+  #  CSV.generate(headers: true) do |csv|
+  #    cols = [:last_name, :first_name, :email, :added_by, :affiliation, :perks, :comments, :type,
+  #        :booked, :invited_at, :invite_expiration, :referral_expiration]
+  #    csv << cols
+  #    guests.each do |guest|
+  #      user_email = guest.user.email
+  #      gattr = guest.attributes.symbolize_keys.to_h
+  #      gattr[:added_by] = guest.user.email
+  #      gattr[:booked] = gattr[:booked] ? 'X' : ''
+  #      csv << gattr.values_at(*cols)
+  #    end
+  #  end
+  #end
+  
   def self.to_csv
     guests = all
     CSV.generate(headers: true) do |csv|
-      cols = [:last_name, :first_name, :email, :added_by, :affiliation, :perks, :comments, :type,
-          :booked, :invited_at, :invite_expiration, :referral_expiration]
+      cols = [:first_name, :last_name, :email, :affiliation, :perks, :comments, 
+               :seat_category, :allotted, :committed, :guestcommitted, :status]
       csv << cols
       guests.each do |guest|
-        user_email = guest.user.email
-        gattr = guest.attributes.symbolize_keys.to_h
-        gattr[:added_by] = guest.user.email
-        gattr[:booked] = gattr[:booked] ? 'X' : ''
-        csv << gattr.values_at(*cols)
+        guest.guest_seat_tickets.each do |ticket|
+          user_email = guest.user.email
+          gattr = guest.attributes.symbolize_keys.to_h
+          gattr[:added_by] = guest.user.email
+          gattr[:status] = guest.booked ? 'X' : '
+          gattr[:seat_category] = ticket.seat.category
+          gattr[:allotted] = ticket.allotted
+          gattr[:committed] = ticket.committed
+          
+          csv << gattr.values_at(*cols)
+        end
       end
     end
+  end
+
+  after_create :generate_qr_code
+
+  def generate_qr_code
+    Rails.logger.info "Generating QR code for guest #{self.id}"
+    self.qr_code = QrCodeService.generate_qr_code(self)
+    self.qr_code_png = QrCodeService.generate_qr_code_png(self)
+
+    save
+    Rails.logger.info "QR code and QR code PNG generated for guest #{self.id}"
   end
 end

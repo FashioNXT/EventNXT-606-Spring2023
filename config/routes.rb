@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       post 'import', to: 'guests#process_import'
       get 'new_guest', to: 'guests#new_guest'
     end
+
+    member do
+      get 'show_qr'
+    end
   end
 
   resources :seats
@@ -79,7 +83,7 @@ Rails.application.routes.draw do
     end
         resources :email_templates, path: :templates
         resources :referral_rewards, path: :rewards
-        resources :referral_summary, only: [:index]
+        resources :referral_summary
         resources :seats
       end
     end
@@ -87,6 +91,17 @@ Rails.application.routes.draw do
     namespace :v2 do 
       resources :users, only: [:index, :show, :update, :destroy]
     end
+    
+    
+    # ===============================================================================
+    # Amith - Amin 2023-04-21: to give access to CRMNXT team to out users information
+    namespace :nxt do
+      get 'users' => "users_info#index"
+    end
+    # Amith - Amin 2023-04-21
+    # ===============================================================================
+    
+    
     #if your application is hosted at http://example.com 
     #and endpoint is at api/v2/users, 
     #you can make a request to http://example.com/api/v2/users to get a list of users.
