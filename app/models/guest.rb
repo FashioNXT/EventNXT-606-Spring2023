@@ -21,10 +21,12 @@ class Guest < ApplicationRecord
   validates :email, presence: true, uniqueness: { scope: :event_id }
   #validates :seat_level, presence: true
 
-  def self.new_guest(attributes = {})
-    guest = self.new(attributes)
-    guest.type = 'Ticketmaster'
-    guest
+ def self.new_guest(attributes = {})
+    puts "Creating guest with data: first_name=#{attributes[:first_name]}, last_name=#{attributes[:last_name]}, email=#{attributes[:email]}, event_id=#{attributes[:event_id]}"
+    guest = Guest.new(attributes) #creates new guest
+    
+    
+    guest#return guest
   end
   
   def checked_only_if_booked

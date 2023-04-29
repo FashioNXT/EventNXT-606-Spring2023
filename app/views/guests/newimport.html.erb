@@ -31,6 +31,11 @@
     <%= form.label :api_key %>
     <%= form.text_field :api_key %>
   </div>
+  
+  <div class="field">
+  <%= form.label :ticketing_website %>
+  <%= form.select :ticketing_website, ['Ticketmaster', 'Eventbrite'], prompt: 'Select a ticketing website' %>
+  </div>
 
   <div class="actions">
     <%= form.submit "Import Guests" %>
@@ -140,3 +145,4 @@ function toggle(source) {
         }
     }
 </script>
+
