@@ -65,7 +65,7 @@ class Guest < ApplicationRecord
           user_email = guest.user.email
           gattr = guest.attributes.symbolize_keys.to_h
           gattr[:added_by] = guest.user.email
-          gattr[:status] = guest.booked ? 'X' : '
+          gattr[:status] = guest.booked ? 'X' : ''
           gattr[:seat_category] = ticket.seat.category
           gattr[:allotted] = ticket.allotted
           gattr[:committed] = ticket.committed
