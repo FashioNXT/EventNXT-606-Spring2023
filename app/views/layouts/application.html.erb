@@ -27,7 +27,6 @@
 
   <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand" href=""><strong>EventNXT</strong></a> -->
       <%= link_to root_path, class: 'navbar-brand' do %>
         <strong>EventNXT</strong>
       <% end %>
@@ -44,25 +43,7 @@
           <li class="nav-item">
             <%= link_to 'Home', root_path, class: 'nav-link active', aria: { current: 'page' } %>
           </li>
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
         </ul>
-        <div class="btn-group dropstart ">
-          <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
-            Dropstart
-          </button>
-          <ul class="dropdown-menu">
-            <!-- Dropdown menu links -->
-            <li><a class="dropdown-item" href="#login">Login</a></li>
-
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </div>
       </div>
     </div>
   </nav>
@@ -75,7 +56,6 @@
   <script>
     const navigationHeight = document.querySelector("nav").offsetHeight;
     document.documentElement.style.setProperty("--navigation-height", `${navigationHeight}px`);
-    console.log(navigationHeight);
   </script>
 </body>
 </html>
