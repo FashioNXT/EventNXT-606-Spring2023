@@ -4,11 +4,16 @@ Rails.application.routes.draw do
       get 'import'
       post 'import', to: 'guests#process_import'
       get 'new_guest', to: 'guests#new_guest'
+      post 'import_csv', to: 'guests#import_guests_csv'
     end
 
     member do
       get 'show_qr'
     end
+    
+    # collection do
+    #   post 'guests/import_guests_csv', to: 'guests#import_guests_csv', as: 'import_guests_csv'
+    # end
   end
 
   resources :seats

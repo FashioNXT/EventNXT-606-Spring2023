@@ -58,9 +58,14 @@ class Guest < ApplicationRecord
     guests = all
     CSV.generate(headers: true) do |csv|
       cols = [:first_name, :last_name, :email, :affiliation, :perks, :comments, 
-               :seat_category, :allotted, :committed, :guestcommitted, :status]
+               :seat_category, :allotted, :committed, :guestcommitted, :status, :added_by]
       csv << cols
       guests.each do |guest|
+        if guest.guest_seat_tickets.empty?
+          csv << [guest.first_name, guest.last_name, guest.email, guest.affiliation, guest.perks, guest.comments, '', '', '', '', '', guest.user.email]
+          next
+        end
+      
         guest.guest_seat_tickets.each do |ticket|
           user_email = guest.user.email
           gattr = guest.attributes.symbolize_keys.to_h
@@ -73,6 +78,31 @@ class Guest < ApplicationRecord
           csv << gattr.values_at(*cols)
         end
       end
+    end
+  end
+  
+  def self.import_guests_csv(file, event)
+    CSV.foreach(file.path, headers: true, header_converters: :symbol, converters: :all) do |row|
+      first_name = row[:first_name]
+      last_name = row[:last_name]
+      email = row[:email]
+      
+      event_id = event.id
+      added_by = event.user.id
+      
+      # Try to find an existing guest with the same email
+      guest = Guest.find_or_initialize_by(email: email, event_id: event_id)
+      if guest.new_record?
+        # Guest.create!(first_name: first_name, last_name: last_name, email: email, added_by: added_by, event_id: event_id)
+        guest.first_name = first_name
+        guest.last_name = last_name
+        guest.email = email
+        guest.added_by = added_by
+        guest.event_id = event_id
+        guest.save!
+      end
+
+      
     end
   end
 
