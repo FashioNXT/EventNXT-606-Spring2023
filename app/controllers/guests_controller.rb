@@ -163,6 +163,15 @@ class GuestsController < ApplicationController
     @qr_code_svg = QrCodeService.generate_qr_code(@guest)
   end
   
+  
+  def import_guests_csv
+    event_id = params[:event_id]
+    event = Event.find(event_id)
+    Guest.import_guests_csv(params[:file], event)
+    redirect_to event_path(event), notice: "Guests imported"
+    
+  end
+  
   # def destroy_all
   #   @event = Event.find(params[:event_id])
   #   @guests = @event.guests

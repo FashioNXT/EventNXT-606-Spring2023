@@ -315,6 +315,17 @@
   </div>
   <%= render 'guest_list' %>
 </div>
+
+<!--Added by Sushmita for guest import-->
+<h2>Import Guests</h2>
+<div class='mb-4'>
+<%= form_tag import_csv_guests_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= hidden_field_tag :event_id, @event.id %>
+  <%= submit_tag "Upload Csv" , class: "btn btn-primary"%>
+<% end %>
+</div>
+
 <h2>Manage Box Office Sales</h2>
 <div class='mb-2'>
   <%= render 'bulk_referral_email' %>
@@ -431,3 +442,5 @@
 </div>-->
 <%= link_to "Back" , '/events' , style:"height:40px;width:80px", class:"btn btn-primary" %><br>
 <br>
+
+
