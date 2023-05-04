@@ -76,7 +76,7 @@ Rails.application.routes.draw do
       resources :events do
         get '/summary' => 'events#summary'
         get '/headers/:id' => 'events#headers'
-        get '/dataload/:header/:firstName/:lastName/:email/:seatLevel/:seats' => 'events#dataload'
+        get '/dataload/:header/:firstName/:lastName/:email/:seatLevel/:seats/:orderAmount' => 'events#dataload'
         resource :guest_referrals, path: :refer, only: [:show, :create]
         resource :guest_referees, path: :purchase, only: [:show, :create]
         resources :guests do
