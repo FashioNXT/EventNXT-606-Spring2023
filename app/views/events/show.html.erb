@@ -185,6 +185,11 @@
                       data-bs-target="#event-modal">Edit Event</button>
           <%= button_to "Delete Event" , @event, :method=> :delete, data: {confirm: "Are you sure you want to
                       delete this event?"}, class: 'btn btn-danger btn-lg px-4 me-md-2' %>
+                      
+          <!--added by Sushmita-->
+          <!--<%= button_to "Duplicate Event", @event, :method=> :duplicate, class: 'btn btn-primary btn-lg px-4 me-md-2' %>-->
+          <%= button_to "Duplicate Event", duplicate_event_path(@event.id), method: :post, class: 'btn btn-primary btn-lg px-4 me-md-2' %>
+
         </div>
       </div>
     </div>

@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     #   post 'guests/import_guests_csv', to: 'guests#import_guests_csv', as: 'import_guests_csv'
     # end
   end
+  
+  resources :events do
+    post 'duplicate', on: :member
+  end
+
 
   resources :seats
   use_doorkeeper do
