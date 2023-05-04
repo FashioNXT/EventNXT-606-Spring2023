@@ -275,6 +275,7 @@
   <!--<table class="center">-->
     <tr>
       <th width=199.8>Category</th>
+      <th width=199.8>Total Seats</th>
       <th width=199.8>VIP Guests</th>
       <th width=199.8>Total Allotted</th>
       <th width=199.8>Total Committed</th>
@@ -287,6 +288,7 @@
       <% @res.each do |result| %>
         <tr>
           <th width=199.8><%= result.category %></th>
+          <th width=199.8><%= result.total_count %></th>
           <th width=199.8><%= result.total_guests %></th>
           <th width=199.8><%= result.total_allotted%></th>
           <th width=199.8><%= result.total_committed %></th>
