@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 202211111668232192) do
     t.integer "email"
     t.integer "seat_section"
     t.integer "tickets"
+    t.integer "order_amount"
     t.index ["event_id"], name: "index_boxoffice_headers_on_event_id"
   end
 
@@ -189,6 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 202211111668232192) do
     t.string "last_name"
     t.string "seat_section"
     t.integer "tickets"
+    t.integer "order_amount"
     t.index ["event_id"], name: "index_sale_tickets_on_event_id"
     t.index ["user_id"], name: "index_sale_tickets_on_user_id"
   end

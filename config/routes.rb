@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     #   post 'guests/import_guests_csv', to: 'guests#import_guests_csv', as: 'import_guests_csv'
     # end
   end
+  
+  resources :events do
+    post 'duplicate', on: :member
+  end
+
 
   resources :seats
   use_doorkeeper do
@@ -71,7 +76,7 @@ Rails.application.routes.draw do
       resources :events do
         get '/summary' => 'events#summary'
         get '/headers/:id' => 'events#headers'
-        get '/dataload/:header/:firstName/:lastName/:email/:seatLevel/:seats' => 'events#dataload'
+        get '/dataload/:header/:firstName/:lastName/:email/:seatLevel/:seats/:orderAmount' => 'events#dataload'
         resource :guest_referrals, path: :refer, only: [:show, :create]
         resource :guest_referees, path: :purchase, only: [:show, :create]
         resources :guests do

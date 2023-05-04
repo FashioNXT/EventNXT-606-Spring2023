@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     
     #added for tentative remaining seats - SP
     @res = Seat.left_joins(:guest_seat_tickets, :guests)
-              .joins("LEFT JOIN boxoffice_seats ON boxoffice_seats.seat_section = seats.category")
+              .joins("LEFT JOIN boxoffice_seats ON boxoffice_seats.seat_section = seats.category and boxoffice_seats.event_id = seats.event_id")
               .select('seats.category,price,total_count,'\
                       'sum(coalesce(committed,0)) as total_committed,'\
                       'sum(coalesce(allotted,0)) as total_allotted,'\
@@ -37,7 +37,8 @@ class EventsController < ApplicationController
                       'sum(coalesce(committed,0)) * price as balance, '\
                       'sum(coalesce(boxoffice_seats.booked_count,0)) as boxoffice_booked')
               .group('seats.id')
-              .where(seats: {event_id: @event.id}, boxoffice_seats: {event_id: @event.id})
+              .where(seats: {event_id: @event.id})
+              # , boxoffice_seats: {event_id: @event.id})
     
     @boxoffice_seats = BoxofficeSeat.where(event_id: params[:id])
   end
@@ -80,7 +81,35 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
 
-    redirect_to root_path
+    redirect_to events_path
+  end
+  
+  def duplicate
+    Rails.logger.debug "Called duplicate_event method"
+    event_id = params[:id]
+    @event = Event.find(event_id)
+    
+    @event1 = Event.new(@event.attributes.except('id').merge('title' => "#{@event.title}_copy"))
+    
+    if @event1.save
+      @event.guests.each do |guest|
+        new_guest = guest.dup
+        new_guest.event_id = @event1.id
+        new_guest.save
+      end
+      
+      
+      @event.seats.each do |seat|
+        new_seat = seat.dup
+        new_seat.event_id = @event1.id
+        new_seat.save
+      end
+      
+      redirect_to events_path
+    else
+      # handle the error case
+    end
+
   end
 
   def import_new_spreadsheet
