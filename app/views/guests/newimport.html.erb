@@ -1,4 +1,5 @@
-<h1>Guests Import - Ticketmaster</h1>
+<div class="container col-xxl-8 px-4 py-5">
+<h1 class="display-5 fw-bold lh-1 mb-4">Guests Import - Ticketmaster</h1>
 
 <div id='sale_tickets' data-controller='boxoffice update' 
     data-boxoffice-eventid-value=<%= @event_id %>
@@ -9,9 +10,9 @@
     data-boxoffice-limit-value=10
     data-action='update:created->boxoffice#query'> 
 
-<%= form_with model: @guests_import, url: import_guests_path(@event_id), method: :post do |form| %>
+<%= form_with model: @guests_import, url: import_guests_path(@event_id), method: :post, class: 'row g-3' do |form| %>
   <% if @guests_import.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@guests_import.errors.count, "error") %> prohibited this import from being saved:</h2>
 
       <ul>
@@ -38,12 +39,12 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Import Guests" %>
+    <%= form.submit "Import Guests", class: 'btn btn-primary' %>
   </div>
 <% end %>
 
 </div>
-
+</div>
  
   
 
@@ -91,7 +92,7 @@
   </form>
 </template>
 
-  <div class='d-flex paginate-number' data-boxoffice-target='maxcount'>
+  <div class='container d-flex paginate-number' data-boxoffice-target='maxcount'>
     <div><span data-nxt-maxcount></span></div>
     <div><button class='paginate-button' data-action="boxoffice#decrementOffset boxoffice#query"><i class="arrow left"></i></button></div>
     <div><button class='paginate-button' data-action="boxoffice#incrementOffset boxoffice#query"><i class="arrow right"></i></button></div>
@@ -105,7 +106,7 @@
       </select>
     </div>
   </div>
-  <div class="containers border-bottom border-dark">
+  <div class="container border-bottom border-dark">
     <div class='row align-items-end mb-4  border-dark'>
     <div class='col-md-auto'><input class='form-check-input' type='checkbox' name='selectAll' onClick="toggle(this)"></div>
       <div class='col-md-3'><span data-bs-toggle='tooltip' data-bs-placement='top'>Name</span></div>
@@ -115,7 +116,7 @@
       <div class='col-md-2'></div>
     </div>
   </div>
-  <div class="containers border-bottom border-dark" data-boxoffice-target='dom'>
+  <div class="container border-bottom border-dark" data-boxoffice-target='dom'>
 
     <div class='row align-items-end mb-4 border-dark'>
     </div>

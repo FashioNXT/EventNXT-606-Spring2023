@@ -4,24 +4,24 @@ export default class BoxofficeController extends IndexController {
     static values = { eventid: Number};
   
      /*global Rails*/
-   query(event) {
-  let eventId = event.currentTarget.dataset.boxofficeEventidValue;
-  let url = event.currentTarget.dataset.boxofficeUrlValue;
+//   query(event) {
+//   let eventId = event.currentTarget.dataset.boxofficeEventidValue;
+//   let url = event.currentTarget.dataset.boxofficeUrlValue;
 
-    Rails.ajax({
-    type: 'GET',
-    url: url,
-    data: {
-      event_id: eventId
-    },
-    success: (data) => {
-      this.update(data);
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  });
-}
+//     Rails.ajax({
+//     type: 'GET',
+//     url: url,
+//     data: {
+//       event_id: eventId
+//     },
+//     success: (data) => {
+//       this.update(data);
+//     },
+//     error: (err) => {
+//       console.log(err);
+//     }
+//   });
+// }
 
 
     postProcess() {

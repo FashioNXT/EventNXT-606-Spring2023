@@ -5,7 +5,8 @@ width: 90px
 }
     
 #guest-disp{
-  display: none; 
+  display: none;
+  padding: 20px;
 }
 
 #guest-email{
@@ -76,9 +77,10 @@ width: 90px
     </form>
   </template>
 
-    <div class="cont-new" id = "guest-disp">
-     <div class="guest-disp" ><h6 id="guest-name"> </h6> </div>
-        <table  width = 300px>
+   
+      <div class="cont-new" id = "guest-disp">
+       <div class="guest-disp" ><h6 id="guest-name"> </h6> </div>
+        <table class="table table-striped table-hover" width = 300px>
           <thead>
             <tr>
               <%# <th>ID</th>
@@ -93,6 +95,7 @@ width: 90px
           </tbody>
         </table>
       </div>
+    
   <div class='d-flex paginate-number'  data-guest-target='maxcount'>
     <div><span data-nxt-maxcount></span></div>
     <div><button class='paginate-button' data-action="guest#decrementOffset guest#query"><i class="arrow left"></i></button></div>
@@ -170,7 +173,7 @@ width: 90px
           <label for='guest-add-comments'>Comments</label>
         </div>
        </div> 
-      <div class='col'><button class='btn-sm btn-success h-100' form='form-add-guest'><i class='bi bi-plus'></i>Add Guest</button></div>
+      <div class='col'><button class='btn btn-success h-100' form='form-add-guest'><i class='bi bi-plus'></i>Add Guest</button></div>
     </form>
   </div>
 </div>

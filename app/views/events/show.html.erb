@@ -60,6 +60,7 @@
 
   #guest-list-table {
     display: none;
+    padding: 20px;
   }
 
   table,
@@ -245,30 +246,33 @@
 </div>
 <%# end of manage seating levels %>
 <br>
-<h4> Box Office Seating </h4>
-<div id='boxoffice-seating' class='mb-4'>
-  <table class="center">
-    <tr>
-      <th width=199.8>Category</th>
-      <th width=199.8>Total Sold</th>
-    </tr>
-    <tbody>
-      <% @boxoffice_seats.each do |result| %>
-      </tr>
-      <th width=199.8>
-        <%= result.seat_section %>
-      </th>
-      <th width=199.8>
-        <%= result.booked_count %>
-      </th>
-    </tr>
-  <% end %>
-</tbody>
-</table>
-</div>
-<h4> Seating Summary Information </h4>
-<div id='seating-summary' class='mb-4'>
-  <table class="center">
+<!--<h4> Box Office Seating </h4>-->
+<!--<div id='boxoffice-seating' class='mb-4'>-->
+<!--  <table class="center">-->
+<!--    <tr>-->
+<!--      <th width=199.8>Category</th>-->
+<!--      <th width=199.8>Total Sold</th>-->
+<!--    </tr>-->
+<!--    <tbody>-->
+<!--      <% @boxoffice_seats.each do |result| %>-->
+<!--      </tr>-->
+<!--      <th width=199.8>-->
+<!--        <%= result.seat_section %>-->
+<!--      </th>-->
+<!--      <th width=199.8>-->
+<!--        <%= result.booked_count %>-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--  <% end %>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+
+<div class="container">
+  <h4 class="display-5 fw-bold lh-1 mb-4 text-center">Seating Summary Information </h4>
+  <div id='seating-summary' class='mb-4'>
+  <table class="table table-striped table-hover">
+  <!--<table class="center">-->
     <tr>
       <th width=199.8>Category</th>
       <th width=199.8>VIP Guests</th>
@@ -294,9 +298,12 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 </div>
 <!-- button to edit/add guests -->
-<h2>Manage Guests</h2>
+<br>
+<div class="container">
+<h4 class="display-5 fw-bold lh-1 mb-4 text-center">Manage Guests</h4>
 <div class='mb-4'>
   <div class='d-flex justify-content-between'>
     <div class='d-flex'>
@@ -315,29 +322,40 @@
   </div>
   <%= render 'guest_list' %>
 </div>
+</div>
 
 <!--Added by Sushmita for guest import-->
+<div class="container">
 <h2>Import Guests</h2>
 <div class='mb-4'>
 <%= form_tag import_csv_guests_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= hidden_field_tag :event_id, @event.id %>
-  <%= submit_tag "Upload Csv" , class: "btn btn-primary"%>
+  <%= submit_tag "File Upload" , class: "btn btn-primary"%>
 <% end %>
 </div>
+<div class='mb-4'>
+  <%= link_to "Import from Other Ticketing Sites", new_guest_guests_path, class: "btn btn-primary" %>
+</div>
+</div>
+<br>
 
-<h2>Manage Box Office Sales</h2>
+<div class="container">
+<h4 class="display-5 fw-bold lh-1 mb-4 text-center">Manage Box Office Sales</h4>
 <div class='mb-2'>
   <%= render 'bulk_referral_email' %>
   <span class='ms-2 me-2'></span>
   <%= render 'box_office_data' %>
-  <p>
-  <%= link_to "Import from Ticketmaster", new_guest_guests_path %>
-</p>
 
 </div>
-<h2>Manage Referrals</h2>
+</div>
+<br>
+
+<div class="container">
+<h4 class="display-5 fw-bold lh-1 mb-4 text-center">Manage Referrals</h4>
 <%= render 'referral_table' %>
+</div>
+
 <script>
   var emailModal = document.getElementById('email-modal')
   emailModal.addEventListener('show.bs.modal', function (event) {
@@ -396,17 +414,18 @@
     console.log(recipients)
   })
 </script>
-<!--<div id="form-div">
-<h3>Import Box Office Data</h3>
-<%= form_tag import_new_spreadsheet_path, multipart: true  do %> 
-  <div style="text-align: center;">
-    <br>
-    <%= label_tag(:file, "Accepted types: .xlsx") %><br>
-    <%= file_field_tag(:file, :id => "file-button", required: true) %><br><br>
-    <%= submit_tag("Import Latest Box Office Data", :class => "button") %>
-  </div>
-<% end %>
-</div> -->
+
+<!--<div id="form-div"> -->
+<!--<h3>Import Box Office Data</h3>-->
+<!--<%= form_tag import_new_spreadsheet_path, multipart: true  do %> -->
+<!--  <div style="text-align: center;">-->
+<!--    <br>-->
+<!--    <%= label_tag(:file, "Accepted types: .xlsx") %><br>-->
+<!--    <%= file_field_tag(:file, :id => "file-button", required: true) %><br><br>-->
+<!--    <%= submit_tag("Import Latest Box Office Data", :class => "button") %>-->
+<!--  </div>-->
+<!--<% end %>-->
+<!--</div>-->
 <!--<h4 class="display-10" style="text-align: center; color: gray;"> Referral Rewards </h1><br><br>
 <div id="referral">
   <div style="text-align: center;" id="center-referral-button">
@@ -440,7 +459,11 @@
     <br><%= button_to "Back to Dashboard", root_path, :class => "btn btn-success btn-rounded", :type => "button", :method => "get" %>
 
 </div>-->
-<%= link_to "Back" , '/events' , style:"height:40px;width:80px", class:"btn btn-primary" %><br>
-<br>
+<br><br>
+<div class="container">
+  <%= link_to "Back" , '/events' , style:"height:40px;width:80px", class:"btn btn-primary" %>
+  <br><br>
+</div>
+
 
 
