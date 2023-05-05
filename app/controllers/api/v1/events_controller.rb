@@ -203,7 +203,7 @@ class Api::V1::EventsController < Api::V1::ApiController
   def create_default_templates(event)
     rsvp_template = EmailTemplate.new 
     rsvp_template.name = 'RSVP Invitation'
-    rsvp_template.subject = '{{event.title}} - Invitation'
+    rsvp_template.subject = '{{event.title}} - RSVP Invitation'
     rsvp_template.body = File.read(Rails.root.join('app', 'views', 'guest_mailer', 'rsvp_invitation_email.html'))
     rsvp_template.is_html = true
     rsvp_template.event_id = event.id
@@ -211,7 +211,7 @@ class Api::V1::EventsController < Api::V1::ApiController
 
     confirmation_template = EmailTemplate.new 
     confirmation_template.name = 'RSVP Confirmation'
-    confirmation_template.subject = '{{event.title}} - Confirmation'
+    confirmation_template.subject = '{{event.title}} - RSVP Confirmation'
     confirmation_template.body = File.read(Rails.root.join('app', 'views', 'guest_mailer', 'rsvp_confirmation_email.html'))
     confirmation_template.is_html = true
     confirmation_template.event_id = event.id
@@ -227,7 +227,7 @@ class Api::V1::EventsController < Api::V1::ApiController
     
     referral_template = EmailTemplate.new 
     referral_template.name = 'Referral Invitation'
-    referral_template.subject = '{{event.title}} - Invitation'
+    referral_template.subject = '{{event.title}} - Referral Invitation'
     referral_template.body = File.read(Rails.root.join('app', 'views', 'guest_mailer', 'referral_invitation_email.html'))
     referral_template.is_html = true
     referral_template.event_id = event.id
