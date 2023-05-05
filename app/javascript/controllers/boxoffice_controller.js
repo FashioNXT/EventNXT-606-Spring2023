@@ -48,6 +48,8 @@ export default class BoxofficeController extends IndexController {
         templates.row, 0);
         this.createDropdown("boxoffice-seats", "boxoffice-container-seats",
         templates.row, 0);
+        this.createDropdown("boxoffice-orderAmount", "boxoffice-container-orderAmount",
+        templates.row, 0);
       });
   }
   createDropdown(element, divElement, rows, value) {
@@ -74,8 +76,9 @@ export default class BoxofficeController extends IndexController {
     var email = this.getSelectedID("boxoffice-email");
     var seatLevel = this.getSelectedID("boxoffice-seatLevel");
     var seats = this.getSelectedID("boxoffice-seats");
+    var orderAmount = this.getSelectedID("boxoffice-orderAmount");
     
-    fetch(`/api/v1/events/${this.eventidValue}/dataload/${header}/${firstName}/${lastName}/${email}/${seatLevel}/${seats}`, {
+    fetch(`/api/v1/events/${this.eventidValue}/dataload/${header}/${firstName}/${lastName}/${email}/${seatLevel}/${seats}/${orderAmount}`, {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("access_token"),
       },
@@ -104,6 +107,7 @@ export default class BoxofficeController extends IndexController {
       this.updateValue('boxoffice-email', values.email);
       this.updateValue('boxoffice-seatLevel', values.seat_section);
       this.updateValue('boxoffice-seats', values.tickets);
+      this.updateValue('boxoffice-orderAmount', values.order_amount);
     });
   }
 
@@ -126,6 +130,8 @@ export default class BoxofficeController extends IndexController {
       templates.row, values.seat_section);
       this.createDropdown("boxoffice-seats", "boxoffice-container-seats",
       templates.row, values.tickets);
+      this.createDropdown("boxoffice-orderAmount", "boxoffice-container-orderAmount",
+      templates.row, values.order_amount);
     });
 }
   updateHeaders() {

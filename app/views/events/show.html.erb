@@ -185,6 +185,11 @@
                       data-bs-target="#event-modal">Edit Event</button>
           <%= button_to "Delete Event" , @event, :method=> :delete, data: {confirm: "Are you sure you want to
                       delete this event?"}, class: 'btn btn-danger btn-lg px-4 me-md-2' %>
+                      
+          <!--added by Sushmita-->
+          <!--<%= button_to "Duplicate Event", @event, :method=> :duplicate, class: 'btn btn-primary btn-lg px-4 me-md-2' %>-->
+          <%= button_to "Duplicate Event", duplicate_event_path(@event.id), method: :post, class: 'btn btn-primary btn-lg px-4 me-md-2' %>
+
         </div>
       </div>
     </div>
@@ -275,6 +280,7 @@
   <!--<table class="center">-->
     <tr>
       <th width=199.8>Category</th>
+      <th width=199.8>Total Seats</th>
       <th width=199.8>VIP Guests</th>
       <th width=199.8>Total Allotted</th>
       <th width=199.8>Total Committed</th>
@@ -287,6 +293,7 @@
       <% @res.each do |result| %>
         <tr>
           <th width=199.8><%= result.category %></th>
+          <th width=199.8><%= result.total_count %></th>
           <th width=199.8><%= result.total_guests %></th>
           <th width=199.8><%= result.total_allotted%></th>
           <th width=199.8><%= result.total_committed %></th>
