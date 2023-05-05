@@ -85,6 +85,7 @@ class Api::V1::EventsController < Api::V1::ApiController
         puts referral.to_json
         if(referral)
           referral.update(:counted => row[seats])
+          #referral.update(:cost => row[cost])
         end
       end
     end
@@ -224,7 +225,7 @@ class Api::V1::EventsController < Api::V1::ApiController
     
     referral_template = EmailTemplate.new 
     referral_template.name = 'Referral Invitation'
-    referral_template.subject = '{{event.title}} - Invitation'
+    referral_template.subject = '{{event.title}} - Referral Invitation'
     referral_template.body = File.read(Rails.root.join('app', 'views', 'guest_mailer', 'referral_invitation_email.html'))
     referral_template.is_html = true
     referral_template.event_id = event.id

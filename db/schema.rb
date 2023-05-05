@@ -94,6 +94,11 @@ ActiveRecord::Schema[7.0].define(version: 202211111668232192) do
     t.string "email", null: false
     t.integer "counted", default: 0, null: false
     t.integer "event", null: false
+    t.integer "reward", default: 0
+    t.string "reward_type", default: "reward/ticket"
+    t.integer "reward_input", default: 0
+    t.integer "cost", default: 0
+    t.boolean "status", default: false
     t.index ["email"], name: "index_guest_referrals_on_email"
     t.index ["guest_id"], name: "index_guest_referrals_on_guest_id"
   end
