@@ -88,7 +88,7 @@ class Api::V1::EventsController < Api::V1::ApiController
         puts referral.to_json
         if(referral)
           referral.update(:counted => row[seats])
-          #referral.update(:cost => row[cost])
+          referral.update(:cost => row[orderAmount])
         end
       end
     end
