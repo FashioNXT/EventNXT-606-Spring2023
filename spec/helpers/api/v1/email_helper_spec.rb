@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe EmailHelper, type: :helper do 
+RSpec.describe Api::V1::EmailHelper, type: :helper do 
     describe "gen_email" do #iteration 2 added Spring 2023
         let!(:sender) {sender.create("senderhelper@gmail.com")}
         let!(:recipients) {recipients.create("receiverhelper@gmail.com")}

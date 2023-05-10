@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "seating_types/new", type: :view do
   before(:each) do
-    assign(:seating_type, SeatingType.new(
+    assign(:seating_type, Seat.new(
       :seat_category => "MyString",
       :total_seat_count => 1,
       :vip_seat_count => 1,

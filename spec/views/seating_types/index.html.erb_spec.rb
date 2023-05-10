@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "seating_types/index", type: :view do
   before(:each) do
     assign(:seating_types, [
-      SeatingType.create!(
+      Seat.create!(
         :seat_category => "Seat Category",
         :total_seat_count => 2,
         :vip_seat_count => 3,
@@ -11,7 +11,7 @@ RSpec.describe "seating_types/index", type: :view do
         :balance_seats => 5,
         :event => nil
       ),
-      SeatingType.create!(
+      Seat.create!(
         :seat_category => "Seat Category",
         :total_seat_count => 2,
         :vip_seat_count => 3,

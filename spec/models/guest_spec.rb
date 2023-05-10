@@ -31,4 +31,48 @@ RSpec.describe Guest, type: :model do
     guest = build :guest, event: event, user: user, **g_attr
     expect(guest).to be_valid
   end
+
+  describe '.import_guests_csv' do
+    let(:file_path) { 'path/to/csv/file.csv' }
+    let(:event) { create(:event) }
+
+    before do
+      # Create a sample CSV file with headers and data
+      CSV.open(file_path, 'wb', headers: true, header_converters: :symbol) do |csv|
+        csv << %i[first_name last_name email]
+        csv << ['John', 'Doe', 'john.doe@example.com']
+        csv << ['Jane', 'Smith', 'jane.smith@example.com']
+      end
+    end
+
+    after do
+      # Delete the sample CSV file
+      File.delete(file_path) if File.exist?(file_path)
+    end
+
+    it 'imports guests from a CSV file' do
+      expect do
+        Guest.import_guests_csv(File.open(file_path), event)
+      end.to change(Guest, :count).by(2)
+
+      john_doe = Guest.find_by(email: 'john.doe@example.com')
+      jane_smith = Guest.find_by(email: 'jane.smith@example.com')
+
+      expect(john_doe).to have_attributes(
+        first_name: 'John',
+        last_name: 'Doe',
+        email: 'john.doe@example.com',
+        added_by: event.user.id,
+        event_id: event.id
+      )
+
+      expect(jane_smith).to have_attributes(
+        first_name: 'Jane',
+        last_name: 'Smith',
+        email: 'jane.smith@example.com',
+        added_by: event.user.id,
+        event_id: event.id
+      )
+    end
+  end
 end
